@@ -1,0 +1,4 @@
+{
+    "mongoURI" : "mongodb+srv://anand:Anandpd502@dev-connector.lhakk.mongodb.net/dev-connector?retryWrites=true&w=majority",
+    "secretToken" : "iamSecretToken"
+}
