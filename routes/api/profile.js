@@ -8,7 +8,7 @@ router.get("/me", verifyToken, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
-    }).populate("User", ["name", "avatar"]);
+    }).populate("user", ["name", "avatar"]);
 
     if (!profile) return res.status(400).json({ message: "No Profile !!" });
     res.json({ profile });
@@ -61,7 +61,7 @@ router.post("/", verifyToken, async (req, res) => {
     let profile = await Profile.findOne({ user: req.user.id });
     // update
     if (profile) {
-      profile = Profile.findOneAndUpdate(
+      profile = await Profile.findOneAndUpdate(
         { user: req.user.id },
         { $set: profileFields },
         { new: true }
@@ -71,11 +71,38 @@ router.post("/", verifyToken, async (req, res) => {
       // Create a profile
       profile = new Profile(profileFields);
       await profile.save();
-      return res.json({ profile });
+      return res.json(profile);
     }
   } catch (error) {
     console.log(error);
     res.status(500).send("Error");
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate("user", ["name", "avatar"]);
+    res.send(profiles);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send(error.message);
+  }
+});
+
+router.get("/user/:user_id", async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate("user", ["name", "avatar"]);
+    if (!profile)
+      return res.status(400).json({ message: "No Profile found !!!" });
+
+    res.send(profile);
+  } catch (error) {
+    console.log(error.message);
+    if (error.kind == "ObjectId")
+      return res.json({ message: "No Profile found !!!" });
+    res.status(500).send(error.message);
   }
 });
 
