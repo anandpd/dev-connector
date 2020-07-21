@@ -255,10 +255,13 @@ router.get("/github/:username", async (req, res) => {
   try {
     let github_id = config.get("GithubClientId");
     let github_secret = config.get("GithubClientSecret");
+    let username = req.params.username;
     let numberOfPages = 5;
 
     const options = {
-      uri: `http://api.github.com/users/${req.params.username}/repos?per_page=${numberOfPages}&sort=created:asc&client_id=${github_id}&client_secret=${github_secret}`,
+      uri: `http://api.github.com/users/${username}/
+            repos?per_page=${numberOfPages}&sort=created:asc&
+            client_id=${github_id}&client_secret=${github_secret}`,
       method: "GET",
       headers: { "user-agent": "node.js" },
     };
