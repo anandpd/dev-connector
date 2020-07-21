@@ -1,5 +1,8 @@
 const joi = require("@hapi/joi");
 
+/**
+ * @description - Auth Validation(Registratiion)
+ ************************************************************/
 module.exports.RegistrationValidation = (data) => {
   const schema = joi.object({
     name: joi.string().required(),
@@ -9,6 +12,9 @@ module.exports.RegistrationValidation = (data) => {
   return schema.validate(data);
 };
 
+/**
+ * @description - Auth Validation(Login)
+ ************************************************************/
 module.exports.LoginValidation = (data) => {
   const schema = joi.object({
     email: joi.string().email().required(),
@@ -17,10 +23,38 @@ module.exports.LoginValidation = (data) => {
   return schema.validate(data);
 };
 
+/**
+ * @description - Profile Validation(Adding a Profile)
+ ************************************************************/
 module.exports.ProfileValidation = (data) => {
   const schema = joi.object({
     status: joi.string().required(),
     skills: joi.required(),
+  });
+  return schema.validate(data);
+};
+
+/**
+ * @description - Experience Validation
+ ************************************************************/
+module.exports.ExperienceValidation = (data) => {
+  const schema = joi.object({
+    title: joi.string().required(),
+    company: joi.string().required(),
+    from: joi.string().required(),
+  });
+  return schema.validate(data);
+};
+
+/**
+ * @description - Education Validation
+ ************************************************************/
+module.exports.EducationValidation = (data) => {
+  const schema = joi.object({
+    school: joi.string().required(),
+    degree: joi.string().required(),
+    fieldofstudy: joi.string().required(),
+    from: joi.string().required(),
   });
   return schema.validate(data);
 };

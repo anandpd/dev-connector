@@ -1,4 +1,6 @@
 {
-    "mongoURI" : "mongodb+srv://anand:Anandpd502@dev-connector.lhakk.mongodb.net/dev-connector?retryWrites=true&w=majority",
-    "secretToken" : "iamSecretToken"
+  "mongoURI": "mongodb+srv://anand:Anandpd502@dev-connector.lhakk.mongodb.net/dev-connector?retryWrites=true&w=majority",
+  "secretToken": "iamSecretToken",
+  "GithubClientId": "db7cc99ce26f9dd8ed3c",
+  "GithubClientSecret": "    cbf6efc2afcba705d8b8ccc3a0917d5f1f73d4bb"
 }
