@@ -58,3 +58,13 @@ module.exports.EducationValidation = (data) => {
   });
   return schema.validate(data);
 };
+
+/**
+ * @description - New Post Validation
+ ************************************************************/
+module.exports.PostValidation = (data) => {
+  const schema = joi.object({
+    text: joi.string().required(),
+  });
+  return schema.validate(data);
+};
