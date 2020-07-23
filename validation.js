@@ -68,3 +68,13 @@ module.exports.PostValidation = (data) => {
   });
   return schema.validate(data);
 };
+
+/**
+ * @description - Comment Validation
+ ************************************************************/
+module.exports.CommentValidation = (data) => {
+  const schema = joi.object({
+    text: joi.string().required(),
+  });
+  return schema.validate(data);
+};
