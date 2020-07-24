@@ -1,9 +1,6 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import NavBar from "./Components/NavBar";
-import Landing from "./Components/Landing";
-import Register from "./Components/auth/Register";
-import Login from "./Components/auth/Login";
+import { NavBar, Landing, Register, Login } from "./Components";
 
 import "./App.css";
 
