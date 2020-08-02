@@ -11,7 +11,7 @@ import {
 import { setAlert } from "./alert";
 import { setAuthToken } from "../utils/setAuthToken";
 
-let nodeserver = "http://localhost:5000";
+let LOCALHOST = "http://localhost:5000";
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -19,7 +19,7 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get(nodeserver + "/api/auth");
+    const res = await axios.get(LOCALHOST + "/api/auth");
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -36,7 +36,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
   const config = { headers: { "Content-Type": "application/json" } };
   const body = JSON.stringify({ name, email, password });
   try {
-    const res = await axios.post(nodeserver + "/api/users", body, config);
+    const res = await axios.post(LOCALHOST + "/api/users", body, config);
     dispatch(setAlert("Keep going :)", "success"));
     dispatch({
       type: REGISTER_SUCCESS,
@@ -59,7 +59,7 @@ export const login = (email, password) => async (dispatch) => {
 
   const body = JSON.stringify({ email, password });
   try {
-    const res = await axios.post(nodeserver + "/api/auth", body, config);
+    const res = await axios.post(LOCALHOST + "/api/auth", body, config);
     dispatch(setAlert("Keep going :)", "success"));
     dispatch({
       type: LOGIN_SUCCESS,
