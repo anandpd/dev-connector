@@ -265,6 +265,7 @@ button {
 
 .form .social-input {
   display: flex;
+  width: 50%;
 }
 
 .form .social-input i {
