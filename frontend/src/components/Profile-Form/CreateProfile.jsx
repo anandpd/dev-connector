@@ -1,8 +1,10 @@
 import React, { useState, Fragment } from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { createProfile } from "../../actions/profile";
 
-const CreateProfile = (props) => {
+const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     company: "",
     webiste: "",
@@ -34,7 +36,13 @@ const CreateProfile = (props) => {
   } = formData;
 
   const [displaySocialLinks, toggleSocialLinks] = useState(false);
-  const onChange = (e) => setFormData({ [e.target.name]: e.target.value });
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    createProfile(formData, history);
+  };
   return (
     <Fragment>
       <h1 className="large text-primary">Create Your Profile</h1>
@@ -43,7 +51,7 @@ const CreateProfile = (props) => {
         profile stand out
       </p>
       <small>* = required field</small>
-      <form className="form">
+      <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="form-group">
           <select name="status" value={status} onChange={(e) => onChange(e)}>
             <option value="0">* Select Professional Status</option>
@@ -145,8 +153,8 @@ const CreateProfile = (props) => {
         </div>
         {displaySocialLinks && (
           <Fragment>
-            <div class="form-group social-input">
-              <i class="fab fa-twitter fa-2x"></i>
+            <div className="form-group social-input">
+              <i className="fab fa-twitter fa-2x"></i>
               <input
                 type="text"
                 placeholder="Twitter URL"
@@ -156,8 +164,8 @@ const CreateProfile = (props) => {
               />
             </div>
 
-            <div class="form-group social-input">
-              <i class="fab fa-facebook fa-2x"></i>
+            <div className="form-group social-input">
+              <i className="fab fa-facebook fa-2x"></i>
               <input
                 type="text"
                 placeholder="Facebook URL"
@@ -167,8 +175,8 @@ const CreateProfile = (props) => {
               />
             </div>
 
-            <div class="form-group social-input">
-              <i class="fab fa-youtube fa-2x"></i>
+            <div className="form-group social-input">
+              <i className="fab fa-youtube fa-2x"></i>
               <input
                 type="text"
                 placeholder="YouTube URL"
@@ -178,8 +186,8 @@ const CreateProfile = (props) => {
               />
             </div>
 
-            <div class="form-group social-input">
-              <i class="fab fa-linkedin fa-2x"></i>
+            <div className="form-group social-input">
+              <i className="fab fa-linkedin fa-2x"></i>
               <input
                 type="text"
                 placeholder="Linkedin URL"
@@ -189,8 +197,8 @@ const CreateProfile = (props) => {
               />
             </div>
 
-            <div class="form-group social-input">
-              <i class="fab fa-instagram fa-2x"></i>
+            <div className="form-group social-input">
+              <i className="fab fa-instagram fa-2x"></i>
               <input
                 type="text"
                 placeholder="Instagram URL"
@@ -211,6 +219,8 @@ const CreateProfile = (props) => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+};
 
-export default CreateProfile;
+export default connect(null, { createProfile })(withRouter(CreateProfile));

@@ -14,7 +14,7 @@ router.get("/me", verifyToken, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
-    }).populate("user", ["name", "avatar"]);
+    }).   ulate("user", ["name", "avatar"]);
 
     if (!profile) return res.status(400).json({ message: "No Profile !!" });
     res.json({ profile });
@@ -40,7 +40,7 @@ router.post("/", verifyToken, async (req, res) => {
     linkedin,
   } = req.body;
   let { error } = ProfileValidation({ skills, status });
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error) return res.status(400).json({ message: error.details[0].message });
 
   // Profile Object
   const profileFields = {};
@@ -81,7 +81,7 @@ router.post("/", verifyToken, async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send("Error");
+    res.status(500).send({ message: "Something went wrong !" });
   }
 });
 

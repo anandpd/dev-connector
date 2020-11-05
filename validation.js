@@ -29,7 +29,7 @@ module.exports.LoginValidation = (data) => {
 module.exports.ProfileValidation = (data) => {
   const schema = joi.object({
     status: joi.string().required(),
-    skills: joi.required(),
+    skills: joi.array().items(joi.string()),
   });
   return schema.validate(data);
 };
